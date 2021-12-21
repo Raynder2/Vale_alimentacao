@@ -161,7 +161,7 @@ if(messagebox.askquestion("Iniciar Automoção", "Para evitar erros, garanta que
 
                 lotacoes = pd.DataFrame(lotacao, columns = ['Cód. Departamento 2', 'Nome do Departamento'])
 
-                if(messagebox.askquestion("ORIGINAIS UNIDADES", "Identifiquei que a planilhas na pasta de Unidades, deseja criar a planilha?",icon ='info') == 'yes'):
+                if(messagebox.askquestion("ORIGINAIS UNIDADES", "Identifiquei planilhas na pasta de Unidades, deseja criar a junção?",icon ='info') == 'yes'):
                     for arq in arquivos:
                         if(str(arq) != 'Thumbs.db' and str(arq) != 'LANÇADAS'):
                             data_atual = date.today()
@@ -281,7 +281,7 @@ if(messagebox.askquestion("Iniciar Automoção", "Para evitar erros, garanta que
                             shutil.move(source,destination)
 
                 dfaux.to_excel('K:/Administrativo/SetorPessoal/Marcelo/1-Arquivos SMS/5-Auxilio Alimentação/'+str(data_atual.month)+"-"+meses[data_atual.month-1]+" "+str(data_atual.year)+'/2-JUNÇÃO UNIDADES '+str(data_atual.month)+"."+str(data_atual.year)+'.xlsx')
-
+                messagebox.showinfo(title="Concluido", message="Junção realizada com sucesso!")
                 # fim do lançamento
 
         else:
