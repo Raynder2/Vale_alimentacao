@@ -171,57 +171,57 @@ if(messagebox.askquestion("Iniciar Automoção", "Para evitar erros, garanta que
                             if os.path.exists(pasta):
                                 planilha = pasta+"/"+arq
                                 if os.path.isfile(planilha):
-                                    valor = ''
-                                    cont2 = ''
+                                    if(str(data_atual.month-1)+"."+str(data_atual.year) in planilha):
+                                        valor = ''
+                                        cont2 = ''
 
-                                    valor2 = ''
-                                    # Carregando planilha com as informações
-                                    df = pd.read_excel(planilha)
+                                        valor2 = ''
+                                        # Carregando planilha com as informações
+                                        df = pd.read_excel(planilha)
 
-                                    # print(df)
+                                        # print(df)
 
-                                    for index, row in df.iterrows():
-                                        if("MATRÍCULA" in str(row) or "NOME DOS PROFISSIONAIS" in str(row)):
-                                            valor = str(valor)+str(index)+','
-                                            cont2 = index
+                                        for index, row in df.iterrows():
+                                            if("MATRÍCULA" in str(row) or "NOME DOS PROFISSIONAIS" in str(row)):
+                                                valor = str(valor)+str(index)+','
+                                                cont2 = index
 
-                                        limite = index
+                                            limite = index
 
-                                    # valor = valor.split(',')
+                                        # valor = valor.split(',')
 
-                                    i = 0
-                                    drop = 0
+                                        i = 0
+                                        drop = 0
 
-                                    for i in range(cont2):
-                                        if(i != valor):
-                                            df = df.drop(i)
+                                        for i in range(cont2):
+                                            if(i != valor):
+                                                df = df.drop(i)
 
-                                    for index, row in df.iterrows():
-                                        if("LEGENDAS" in str(row)):
-                                            drop = 1
-                                        if(drop == 1):
-                                            df = df.drop(int(index))
+                                        for index, row in df.iterrows():
+                                            if("LEGENDAS" in str(row)):
+                                                drop = 1
+                                            if(drop == 1):
+                                                df = df.drop(int(index))
 
-                                    cod = arq.split('-')[0]
-                                    df['Unnamed: 7'] = cod
-                                    df.rename({"Unnamed: 7": "Cód. Departamento 2"}, axis=1, inplace=True)
+                                        cod = arq.split('-')[0]
+                                        df['Unnamed: 7'] = cod
+                                        df.rename({"Unnamed: 7": "Cód. Departamento 2"}, axis=1, inplace=True)
 
-                                    lotacoes = lotacoes.loc[lotacoes['Cód. Departamento 2'] != 'NÃO RECEBEM']
-                                    lotacoes['Cód. Departamento 2'].astype(int)
-                                    lotac = lotacoes.loc[lotacoes['Cód. Departamento 2'] == int(cod)]
-                                    lotac = lotac['Nome do Departamento'].values[0]
+                                        lotacoes = lotacoes.loc[lotacoes['Cód. Departamento 2'] != 'NÃO RECEBEM']
+                                        lotacoes['Cód. Departamento 2'].astype(int)
+                                        lotac = lotacoes.loc[lotacoes['Cód. Departamento 2'] == int(cod)]
+                                        lotac = lotac['Nome do Departamento'].values[0]
 
-                                    df['Unnamed: 6'] = lotac
+                                        df['Unnamed: 6'] = lotac
 
-                                    if(contator == 0):
-                                        dfaux = df
-                                    else:
-                                        dfaux = pd.concat([dfaux, df])
+                                        if(contator == 0):
+                                            dfaux = df
+                                        else:
+                                            dfaux = pd.concat([dfaux, df])
+                                        contator = contator+1
 
-                                    contator = contator+1
 
-
-                                        # shutil.move(source,destination)
+                                            # shutil.move(source,destination)
 
 
                             else:
@@ -271,11 +271,14 @@ if(messagebox.askquestion("Iniciar Automoção", "Para evitar erros, garanta que
                         moves[cont3] = codd
 
                 for arq in arquivos:
-                    cod = arq.split('-')[0]
-                    if(cod in moves):
-                        source = pasta+"/"+arq
-                        destination = pasta+"/LANÇADAS/"+arq
-                        shutil.move(source,destination)
+                    if(os.path.isdir(pasta+"/LANÇADAS/") == False):
+                        os.mkdir(pasta+"/LANÇADAS/")
+                    if(str(data_atual.month-1)+"."+str(data_atual.year) in arq):
+                        cod = arq.split('-')[0]
+                        if(cod in moves):
+                            source = pasta+"/"+arq
+                            destination = pasta+"/LANÇADAS/"+arq
+                            shutil.move(source,destination)
 
                 dfaux.to_excel('K:/Administrativo/SetorPessoal/Marcelo/1-Arquivos SMS/5-Auxilio Alimentação/'+str(data_atual.month)+"-"+meses[data_atual.month-1]+" "+str(data_atual.year)+'/2-JUNÇÃO UNIDADES '+str(data_atual.month)+"."+str(data_atual.year)+'.xlsx')
 
