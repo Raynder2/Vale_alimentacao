@@ -23,7 +23,7 @@ lotacao = pd.read_excel("K:/Administrativo/SetorPessoal/Marcelo/1-Arquivos SMS/5
 lotacoes = pd.DataFrame(lotacao, columns = ['Cód. Departamento 2', 'Nome do Departamento'])
 
 for arq in arquivos:
-    # messagebox.askquestion("Iniciar Automoção", "Para evitar erros, garanta que a coluna valor esteja formatada como numeros.",icon ='info') == 'yes' and 
+    # messagebox.askquestion("Iniciar Automoção", "Para evitar erros, garanta que a coluna valor esteja formatada como numeros.",icon ='info') == 'yes' and
     if(str(arq) != 'Thumbs.db'):
         data_atual = date.today()
 
@@ -68,7 +68,7 @@ for arq in arquivos:
                 df = pd.DataFrame( df, columns=['Unnamed: 0','Unnamed: 1','Unnamed: 2','Unnamed: 3','Unnamed: 4','Unnamed: 5','Unnamed: 6','Cód. Departamento 2','Unnamed: 8','Unnamed: 9','Unnamed: 1','Unnamed: 1','Unnamed: 1','Unnamed: 1','Unnamed: 1','Unnamed: 1','Unnamed: 1','Unnamed: 1','Unnamed: 1','Unnamed: 1','Unnamed: 2','Unnamed: 2','Unnamed: 2','Unnamed: 2','Unnamed: 2','Unnamed: 2','Unnamed: 2','Unnamed: 2','Unnamed: 2','Unnamed: 2','Unnamed: 3','Unnamed: 3','Unnamed: 3','Unnamed: 3','Unnamed: 3','Unnamed: 3','Unnamed: 3','Unnamed: 3','Unnamed: 3','Unnamed: 3','Unnamed: 4','Unnamed: 4','Unnamed: 4','Unnamed: 4','Unnamed: 4','Unnamed: 4'])
                 df['Cód. Departamento 2'] = cod
 
-                
+
                 print(df.loc[df["Cód. Departamento 2"] == cod])
                 # print(lotacoes["Cód. Departamento 2"])
 
@@ -76,7 +76,7 @@ for arq in arquivos:
                 # lotac = resul.iloc[2]['Nome do Departamento']
 
                 # print(resul)
-                
+
                 if(contator == 0):
                     dfaux = df
                 else:
